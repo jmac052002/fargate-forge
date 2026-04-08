@@ -23,4 +23,9 @@ provider "aws" {
 
 data "aws_caller_identity" "current" {}
 
-data "aws_region" "current" {}
+data "aws_region" "current" {} 
+
+output "alb_dns_name" {
+  description = "The DNS name of the Application Load Balancer"
+  value       = aws_lb.main.dns_name
+}
