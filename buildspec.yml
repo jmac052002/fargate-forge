@@ -1,0 +1,34 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.11
+    commands:
+      - pip install -r app/requirements.txt
+
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_REPO_URL
+      - echo Running tests...
+      - pytest tests/ -v --tb=short
+
+  build:
+    commands:
+      - echo Building Docker image...
+      - docker build -t $ECR_REPO_URL:latest -t $ECR_REPO_URL:$CODEBUILD_BUILD_NUMBER ./app
+
+  post_build:
+    commands:
+      - echo Pushing Docker image to ECR...
+      - docker push $ECR_REPO_URL:latest
+      - docker push $ECR_REPO_URL:$CODEBUILD_BUILD_NUMBER
+      - echo Writing image definitions file...
+      - printf '[{"name":"%s","imageUri":"%s"}]' "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/fargate-forge-app" "$ECR_REPO_URL:$CODEBUILD_BUILD_NUMBER" > imagedefinitions.json
+
+artifacts:
+  files:
+    - imagedefinitions.json
+    - appspec.yml
+    - taskdef.json 
