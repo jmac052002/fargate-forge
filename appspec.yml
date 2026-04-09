@@ -7,4 +7,3 @@ Resources:
         LoadBalancerInfo:
           ContainerName: "fargate-forge-app"
           ContainerPort: 8000
-        PlatformVersion: "LATEST" 
