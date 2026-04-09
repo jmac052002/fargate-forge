@@ -25,10 +25,10 @@ phases:
       - docker push $ECR_REPO_URL:latest
       - docker push $ECR_REPO_URL:$CODEBUILD_BUILD_NUMBER
       - echo Writing image definitions file...
-      - printf '[{"name":"%s","imageUri":"%s"}]' "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/fargate-forge-app" "$ECR_REPO_URL:$CODEBUILD_BUILD_NUMBER" > imagedefinitions.json
+      - printf '{"ImageURI":"%s"}' "$ECR_REPO_URL:$CODEBUILD_BUILD_NUMBER" > imageDetail.json 
 
 artifacts:
   files:
-    - imagedefinitions.json
     - appspec.yml
-    - taskdef.json 
+    - taskdef.json
+    - imageDetail.json 
