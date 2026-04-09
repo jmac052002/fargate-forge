@@ -7,7 +7,7 @@
   "executionRoleArn": "arn:aws:iam::584996267165:role/fargate-forge-ecs-task-execution",
   "containerDefinitions": [
     {
-      "name": "fargate-forge-app",
+      "name": "<IMAGE1_NAME>",
       "image": "<IMAGE1_URI>",
       "essential": true,
       "portMappings": [
