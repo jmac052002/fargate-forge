@@ -1,5 +1,5 @@
-data "aws_codeconnections_connection" "github" {
-  arn = "arn:aws:codeconnections:us-east-1:584996267165:connection/c9778c02-e3b0-4931-ba3d-aab633c3dcff"
+locals {
+  github_connection_arn = "arn:aws:codeconnections:us-east-1:584996267165:connection/c9778c02-e3b0-4931-ba3d-aab633c3dcff"
 }
 
 resource "aws_s3_bucket" "artifacts" {
@@ -118,7 +118,7 @@ resource "aws_iam_role_policy" "codepipeline" {
           "codestar-connections:UseConnection",
           "codeconnections:UseConnection"
         ]
-        Resource = data.aws_codeconnections_connection.github.arn
+        Resource = local.github_connection_arn
       }
     ]
   })
@@ -145,7 +145,7 @@ resource "aws_codepipeline" "app" {
       output_artifacts = ["source_output"]
 
       configuration = {
-        ConnectionArn        = data.aws_codeconnections_connection.github.arn
+        ConnectionArn        = local.github_connection_arn
         FullRepositoryId     = "jmac052002/fargate-forge"
         BranchName           = "main"
         OutputArtifactFormat = "CODE_ZIP"
