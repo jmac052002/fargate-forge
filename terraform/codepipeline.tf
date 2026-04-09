@@ -182,12 +182,12 @@ resource "aws_codepipeline" "app" {
       version         = "1"
       input_artifacts = ["build_output"]
 
-        configuration = {
-          ApplicationName     = aws_codedeploy_app.app.name
-          DeploymentGroupName = aws_codedeploy_deployment_group.app.deployment_group_name
-    }
-  }
-}  
+          configuration = {
+            ApplicationName     = aws_codedeploy_app.app.name
+            DeploymentGroupName = aws_codedeploy_deployment_group.app.deployment_group_name
+          }
+        }
+      }
 
   tags = {
     Name = "${var.project_name}-pipeline"
