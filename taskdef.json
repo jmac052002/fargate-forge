@@ -7,7 +7,7 @@
   "executionRoleArn": "<TASK_EXECUTION_ROLE_ARN>",
   "containerDefinitions": [
     {
-      "name": "fargate-forge-app",
+      "name": "<IMAGE1_NAME>",
       "image": "<IMAGE1_URI>",
       "essential": true,
       "portMappings": [
