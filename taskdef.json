@@ -8,7 +8,7 @@
   "containerDefinitions": [
     {
       "name": "fargate-forge-app",
-      "image": "<IMAGE1_URI>",
+      "image": "<IMAGE1_NAME>",
       "essential": true,
       "portMappings": [
         {
