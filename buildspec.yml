@@ -31,8 +31,8 @@ phases:
       - echo === imageDetail.json contents ===
       - cat imageDetail.json
 
-  artifacts:
-    files:
-      - appspec.yaml
-      - taskdef.json
-      - imageDetail.json 
+artifacts:
+  files:
+    - appspec.yaml
+    - taskdef.json
+    - imageDetail.json 
