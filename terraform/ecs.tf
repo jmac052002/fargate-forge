@@ -52,7 +52,7 @@ resource "aws_ecs_task_definition" "app" {
 
   container_definitions = jsonencode([
     {
-      name      = "${var.project_name}-app"
+      name = "${var.project_name}-app"
       image     = "${aws_ecr_repository.app.repository_url}:latest"
       essential = true
 
@@ -73,5 +73,33 @@ resource "aws_ecs_task_definition" "app" {
       }
     }
   ])
-}
+} 
+
+resource "aws_ecs_service" "app" {
+  name            = "${var.project_name}-app"
+  cluster         = aws_ecs_cluster.main.id
+  task_definition = aws_ecs_task_definition.app.arn
+  desired_count   = 2
+  launch_type     = "FARGATE"
+
+  network_configuration {
+    subnets         = [for s in aws_subnet.private : s.id]
+    security_groups = [aws_security_group.ecs_tasks.id]
+    assign_public_ip = false
+  }
+
+  deployment_controller {
+    type = "CODE_DEPLOY"
+  }
+
+  load_balancer {
+    target_group_arn = aws_lb_target_group.blue.arn
+    container_name = "${var.project_name}-app"
+    container_port   = 8000
+  }
+
+  lifecycle {
+    ignore_changes = [task_definition, load_balancer]
+  }
+} 
 
