@@ -25,7 +25,7 @@ phases:
       - docker push $ECR_REPO_URL:latest
       - docker push $ECR_REPO_URL:$CODEBUILD_BUILD_NUMBER
       - echo Writing image definitions file...
-      - printf '{"ImageURI":"%s"}' "$ECR_REPO_URL:$CODEBUILD_BUILD_NUMBER" > imageDetail.json 
+      - printf '{"IMAGE1_URI":"%s"}' "$ECR_REPO_URL:$CODEBUILD_BUILD_NUMBER" > imageDetail.json 
 
 artifacts:
   files:
