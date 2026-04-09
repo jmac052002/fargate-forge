@@ -190,7 +190,7 @@ resource "aws_codepipeline" "app" {
         AppSpecTemplateArtifact        = "build_output"
         AppSpecTemplatePath            = "appspec.yaml"
         Image1ArtifactName             = "build_output"
-        Image1ContainerName            = "IMAGE_NAME"
+        Image1ContainerName = "fargate-forge-app"
       }
     }
   }
