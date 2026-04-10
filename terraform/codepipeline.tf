@@ -125,9 +125,10 @@ resource "aws_iam_role_policy" "codepipeline" {
 }
 
 resource "aws_codepipeline" "app" {
-  name     = "${var.project_name}-pipeline"
-  role_arn = aws_iam_role.codepipeline.arn
+  name          = "${var.project_name}-pipeline"
+  role_arn      = aws_iam_role.codepipeline.arn
   pipeline_type = "V2"
+
   artifact_store {
     location = aws_s3_bucket.artifacts.bucket
     type     = "S3"
@@ -189,14 +190,11 @@ resource "aws_codepipeline" "app" {
         TaskDefinitionTemplatePath     = "taskdef.json"
         AppSpecTemplateArtifact        = "build_output"
         AppSpecTemplatePath            = "appspec.yaml"
-        Image1ArtifactName             = "build_output"
-        Image1ContainerName = "fargate-forge-app"
       }
     }
   }
 
-  
   tags = {
     Name = "${var.project_name}-pipeline"
   }
-} 
+}
