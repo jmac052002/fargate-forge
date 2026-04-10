@@ -1,4 +1,4 @@
-markdown# fargate-forge
+fargate-forge
 
 A production-grade CI/CD and container platform on AWS, built as a portfolio project demonstrating real-world cloud engineering practices. Every component is provisioned with Terraform and deployed through a fully automated pipeline.
 
@@ -48,9 +48,9 @@ fargate-forge/
 
 Every push to `main` triggers a full pipeline run:
 
-1. **Source** — CodePipeline detects the GitHub commit via CodeConnections
-2. **Build** — CodeBuild runs pytest, builds a Docker image, tags it with the build number, and pushes to ECR. The task definition is generated dynamically from the live ECS state and the image URI is injected via `sed`
-3. **Deploy** — CodeDeploy performs a blue/green deployment to ECS Fargate. New tasks spin up on the green target group, pass ALB health checks, traffic shifts, and old tasks terminate after a 5-minute wait
+1. **Source** CodePipeline detects the GitHub commit via CodeConnections
+2. **Build** CodeBuild runs pytest, builds a Docker image, tags it with the build number, and pushes to ECR. The task definition is generated dynamically from the live ECS state and the image URI is injected via `sed`
+3. **Deploy** CodeDeploy performs a blue/green deployment to ECS Fargate. New tasks spin up on the green target group, pass ALB health checks, traffic shifts, and old tasks terminate after a 5-minute wait
 
 ## Infrastructure
 
