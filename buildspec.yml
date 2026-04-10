@@ -30,11 +30,7 @@ phases:
       - sed -i "s|<IMAGE1_NAME>|$ECR_REPO_URL:$CODEBUILD_BUILD_NUMBER|g" taskdef.json
       - echo Writing image definitions file...
       - printf '{"ImageURI":"%s"}' "$ECR_REPO_URL:$CODEBUILD_BUILD_NUMBER" > imageDetail.json
-      - echo === taskdef.json contents ===
-      - cat taskdef.json
-      - echo === imageDetail.json contents ===
-      - cat imageDetail.json
-
+      
 artifacts:
   files:
     - appspec.yaml
