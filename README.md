@@ -21,6 +21,7 @@ WAF + CloudWatch
 | Observability | CloudWatch Container Insights, structured logging |
 
 ## Project Structure
+```
 fargate-forge/
 ├── app/                        # FastAPI application
 │   ├── main.py                 # Application entrypoint
@@ -43,7 +44,7 @@ fargate-forge/
 ├── buildspec.yml               # CodeBuild pipeline definition
 ├── appspec.yaml                # CodeDeploy ECS deployment spec
 └── taskdef.json                # ECS task definition template
-
+```
 ## CI/CD Pipeline
 
 Every push to `main` triggers a full pipeline run:
