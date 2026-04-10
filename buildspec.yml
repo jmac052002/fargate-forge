@@ -24,8 +24,11 @@ phases:
       - echo Pushing Docker image to ECR...
       - docker push $ECR_REPO_URL:latest
       - docker push $ECR_REPO_URL:$CODEBUILD_BUILD_NUMBER
+      - echo Generating taskdef.json from live ECS task definition...
+      - aws ecs describe-task-definition --task-definition fargate-forge-app --query taskDefinition > taskdef.json
+      - python3 -c "import json; f=open('taskdef.json'); td=json.load(f); f.close(); [c.update({'image':'<IMAGE1_NAME>'}) for c in td['containerDefinitions'] if c['name']=='fargate-forge-app']; open('taskdef.json','w').write(json.dumps(td, indent=2))"
       - echo Writing image definitions file...
-      - printf '{"ImageURI":"%s"}' "$ECR_REPO_URL:$CODEBUILD_BUILD_NUMBER" > imageDetail.json 
+      - printf '{"ImageURI":"%s"}' "$ECR_REPO_URL:$CODEBUILD_BUILD_NUMBER" > imageDetail.json
       - echo === taskdef.json contents ===
       - cat taskdef.json
       - echo === imageDetail.json contents ===
@@ -35,4 +38,4 @@ artifacts:
   files:
     - appspec.yaml
     - taskdef.json
-    - imageDetail.json 
+    - imageDetail.json
