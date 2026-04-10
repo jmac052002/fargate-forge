@@ -76,5 +76,4 @@ resource "aws_codedeploy_deployment_group" "app" {
       }
     }
   }
-} 
-
+}
