@@ -33,15 +33,6 @@ resource "aws_iam_role_policy_attachment" "ecs_task_execution" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
-resource "aws_cloudwatch_log_group" "ecs" {
-  name              = "/aws/ecs/${var.project_name}"
-  retention_in_days = 30
-
-  tags = {
-    Name = "${var.project_name}-ecs-log-group"
-  }
-}
-
 resource "aws_ecs_task_definition" "app" {
   family                   = "${var.project_name}-app"
   network_mode             = "awsvpc"
@@ -99,7 +90,10 @@ resource "aws_ecs_service" "app" {
   }
 
   lifecycle {
-    ignore_changes = [task_definition, load_balancer]
+    ignore_changes = [
+      network_configuration,
+      task_definition,
+      load_balancer,
+    ]
   }
-} 
-
+}
