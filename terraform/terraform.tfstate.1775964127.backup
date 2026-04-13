@@ -1,0 +1,2495 @@
+{
+  "version": 4,
+  "terraform_version": "1.14.8",
+  "serial": 316,
+  "lineage": "c084f914-89a8-e052-3fe3-c8092dda1674",
+  "outputs": {
+    "alb_dns_name": {
+      "value": "fargate-forge-alb-1442679803.us-east-1.elb.amazonaws.com",
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "mode": "data",
+      "type": "aws_caller_identity",
+      "name": "current",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "account_id": "584996267165",
+            "arn": "arn:aws:iam::584996267165:user/Joseph",
+            "id": "584996267165",
+            "user_id": "AIDAYQND6USOUJBXNRYRH"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "aws_region",
+      "name": "current",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "description": "US East (N. Virginia)",
+            "endpoint": "ec2.us-east-1.amazonaws.com",
+            "id": "us-east-1",
+            "name": "us-east-1"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudwatch_log_group",
+      "name": "ecs",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:logs:us-east-1:584996267165:log-group:/aws/ecs/fargate-forge",
+            "id": "/aws/ecs/fargate-forge",
+            "kms_key_id": "",
+            "log_group_class": "STANDARD",
+            "name": "/aws/ecs/fargate-forge",
+            "name_prefix": "",
+            "retention_in_days": 30,
+            "skip_destroy": false,
+            "tags": {
+              "Name": "fargate-forge-ecs-log-group"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "fargate-forge-ecs-log-group",
+              "Project": "fargate-forge"
+            }
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudwatch_log_group",
+      "name": "waf",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:logs:us-east-1:584996267165:log-group:aws-waf-logs-fargate-forge",
+            "id": "aws-waf-logs-fargate-forge",
+            "kms_key_id": "",
+            "log_group_class": "STANDARD",
+            "name": "aws-waf-logs-fargate-forge",
+            "name_prefix": "",
+            "retention_in_days": 30,
+            "skip_destroy": false,
+            "tags": {
+              "Name": "fargate-forge-waf-log-group"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "fargate-forge-waf-log-group",
+              "Project": "fargate-forge"
+            }
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjAifQ=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_codebuild_project",
+      "name": "app",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:codebuild:us-east-1:584996267165:project/fargate-forge-build",
+            "artifacts": [
+              {
+                "artifact_identifier": "",
+                "bucket_owner_access": "",
+                "encryption_disabled": false,
+                "location": "",
+                "name": "fargate-forge-build",
+                "namespace_type": "",
+                "override_artifact_name": false,
+                "packaging": "NONE",
+                "path": "",
+                "type": "CODEPIPELINE"
+              }
+            ],
+            "badge_enabled": false,
+            "badge_url": "",
+            "build_batch_config": [],
+            "build_timeout": 60,
+            "cache": [
+              {
+                "location": "",
+                "modes": [],
+                "type": "NO_CACHE"
+              }
+            ],
+            "concurrent_build_limit": 0,
+            "description": "Builds and pushes Docker image to ECR",
+            "encryption_key": "arn:aws:kms:us-east-1:584996267165:alias/aws/s3",
+            "environment": [
+              {
+                "certificate": "",
+                "compute_type": "BUILD_GENERAL1_SMALL",
+                "environment_variable": [
+                  {
+                    "name": "AWS_ACCOUNT_ID",
+                    "type": "PLAINTEXT",
+                    "value": "584996267165"
+                  },
+                  {
+                    "name": "ECR_REPO_URL",
+                    "type": "PLAINTEXT",
+                    "value": "584996267165.dkr.ecr.us-east-1.amazonaws.com/fargate-forge-app"
+                  },
+                  {
+                    "name": "IMAGE_TAG",
+                    "type": "PLAINTEXT",
+                    "value": "latest"
+                  }
+                ],
+                "fleet": [],
+                "image": "aws/codebuild/standard:7.0",
+                "image_pull_credentials_type": "CODEBUILD",
+                "privileged_mode": true,
+                "registry_credential": [],
+                "type": "LINUX_CONTAINER"
+              }
+            ],
+            "file_system_locations": [],
+            "id": "arn:aws:codebuild:us-east-1:584996267165:project/fargate-forge-build",
+            "logs_config": [
+              {
+                "cloudwatch_logs": [
+                  {
+                    "group_name": "/aws/codebuild/fargate-forge",
+                    "status": "ENABLED",
+                    "stream_name": "build-log"
+                  }
+                ],
+                "s3_logs": [
+                  {
+                    "bucket_owner_access": "",
+                    "encryption_disabled": false,
+                    "location": "",
+                    "status": "DISABLED"
+                  }
+                ]
+              }
+            ],
+            "name": "fargate-forge-build",
+            "project_visibility": "PRIVATE",
+            "public_project_alias": "",
+            "queued_timeout": 480,
+            "resource_access_role": "",
+            "secondary_artifacts": [],
+            "secondary_source_version": [],
+            "secondary_sources": [],
+            "service_role": "arn:aws:iam::584996267165:role/fargate-forge-codebuild",
+            "source": [
+              {
+                "auth": [],
+                "build_status_config": [],
+                "buildspec": "buildspec.yml",
+                "git_clone_depth": 0,
+                "git_submodules_config": [],
+                "insecure_ssl": false,
+                "location": "",
+                "report_build_status": false,
+                "type": "CODEPIPELINE"
+              }
+            ],
+            "source_version": "",
+            "tags": {
+              "Name": "fargate-forge-build"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "fargate-forge-build",
+              "Project": "fargate-forge"
+            },
+            "vpc_config": []
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_ecr_repository.app",
+            "aws_iam_role.codebuild",
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_codedeploy_app",
+      "name": "app",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "application_id": "18dbcdd1-3c64-4ba1-a798-cb9c78d3bebd",
+            "arn": "arn:aws:codedeploy:us-east-1:584996267165:application:fargate-forge-deploy",
+            "compute_platform": "ECS",
+            "github_account_name": "",
+            "id": "72d360f2-8a25-4950-8f31-c930c49a0f32:fargate-forge-deploy",
+            "linked_to_github": false,
+            "name": "fargate-forge-deploy",
+            "tags": {},
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "fargate-forge"
+            }
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_codedeploy_deployment_group",
+      "name": "app",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "alarm_configuration": [],
+            "app_name": "fargate-forge-deploy",
+            "arn": "arn:aws:codedeploy:us-east-1:584996267165:deploymentgroup:fargate-forge-deploy/fargate-forge-deployment-group",
+            "auto_rollback_configuration": [
+              {
+                "enabled": true,
+                "events": [
+                  "DEPLOYMENT_FAILURE"
+                ]
+              }
+            ],
+            "autoscaling_groups": [],
+            "blue_green_deployment_config": [
+              {
+                "deployment_ready_option": [
+                  {
+                    "action_on_timeout": "CONTINUE_DEPLOYMENT",
+                    "wait_time_in_minutes": 0
+                  }
+                ],
+                "green_fleet_provisioning_option": [],
+                "terminate_blue_instances_on_deployment_success": [
+                  {
+                    "action": "TERMINATE",
+                    "termination_wait_time_in_minutes": 5
+                  }
+                ]
+              }
+            ],
+            "compute_platform": "ECS",
+            "deployment_config_name": "CodeDeployDefault.ECSAllAtOnce",
+            "deployment_group_id": "6455ede1-e235-4b3b-942f-922d705eac0f",
+            "deployment_group_name": "fargate-forge-deployment-group",
+            "deployment_style": [
+              {
+                "deployment_option": "WITH_TRAFFIC_CONTROL",
+                "deployment_type": "BLUE_GREEN"
+              }
+            ],
+            "ec2_tag_filter": [],
+            "ec2_tag_set": [],
+            "ecs_service": [
+              {
+                "cluster_name": "fargate-forge-cluster",
+                "service_name": "fargate-forge-app"
+              }
+            ],
+            "id": "b16a99d7-d4b0-42fe-808c-ab36c38a77f1",
+            "load_balancer_info": [
+              {
+                "elb_info": [],
+                "target_group_info": [],
+                "target_group_pair_info": [
+                  {
+                    "prod_traffic_route": [
+                      {
+                        "listener_arns": [
+                          "arn:aws:elasticloadbalancing:us-east-1:584996267165:listener/app/fargate-forge-alb/eb26a84603648f97/07c2baee93ebbddc"
+                        ]
+                      }
+                    ],
+                    "target_group": [
+                      {
+                        "name": "fargate-forge-tg-blue"
+                      },
+                      {
+                        "name": "fargate-forge-tg-green"
+                      }
+                    ],
+                    "test_traffic_route": []
+                  }
+                ]
+              }
+            ],
+            "on_premises_instance_tag_filter": [],
+            "outdated_instances_strategy": "UPDATE",
+            "service_role_arn": "arn:aws:iam::584996267165:role/fargate-forge-codedeploy",
+            "tags": {},
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "fargate-forge"
+            },
+            "termination_hook_enabled": false,
+            "trigger_configuration": []
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_cloudwatch_log_group.ecs",
+            "aws_codedeploy_app.app",
+            "aws_ecr_repository.app",
+            "aws_ecs_cluster.main",
+            "aws_ecs_service.app",
+            "aws_ecs_task_definition.app",
+            "aws_iam_role.codedeploy",
+            "aws_iam_role.ecs_task_execution",
+            "aws_lb.main",
+            "aws_lb_listener.http",
+            "aws_lb_target_group.blue",
+            "aws_lb_target_group.green",
+            "aws_security_group.alb",
+            "aws_security_group.ecs_tasks",
+            "aws_subnet.private",
+            "aws_subnet.public",
+            "aws_vpc.main",
+            "data.aws_region.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_codepipeline",
+      "name": "app",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:codepipeline:us-east-1:584996267165:fargate-forge-pipeline",
+            "artifact_store": [
+              {
+                "encryption_key": [],
+                "location": "fargate-forge-artifacts-584996267165",
+                "region": "",
+                "type": "S3"
+              }
+            ],
+            "execution_mode": "SUPERSEDED",
+            "id": "fargate-forge-pipeline",
+            "name": "fargate-forge-pipeline",
+            "pipeline_type": "V2",
+            "role_arn": "arn:aws:iam::584996267165:role/fargate-forge-codepipeline",
+            "stage": [
+              {
+                "action": [
+                  {
+                    "category": "Source",
+                    "configuration": {
+                      "BranchName": "main",
+                      "ConnectionArn": "arn:aws:codeconnections:us-east-1:584996267165:connection/c9778c02-e3b0-4931-ba3d-aab633c3dcff",
+                      "FullRepositoryId": "jmac052002/fargate-forge",
+                      "OutputArtifactFormat": "CODE_ZIP"
+                    },
+                    "input_artifacts": [],
+                    "name": "Source",
+                    "namespace": "",
+                    "output_artifacts": [
+                      "source_output"
+                    ],
+                    "owner": "AWS",
+                    "provider": "CodeStarSourceConnection",
+                    "region": "",
+                    "role_arn": "",
+                    "run_order": 1,
+                    "timeout_in_minutes": 0,
+                    "version": "1"
+                  }
+                ],
+                "before_entry": [],
+                "name": "Source",
+                "on_failure": [],
+                "on_success": []
+              },
+              {
+                "action": [
+                  {
+                    "category": "Build",
+                    "configuration": {
+                      "ProjectName": "fargate-forge-build"
+                    },
+                    "input_artifacts": [
+                      "source_output"
+                    ],
+                    "name": "Build",
+                    "namespace": "",
+                    "output_artifacts": [
+                      "build_output"
+                    ],
+                    "owner": "AWS",
+                    "provider": "CodeBuild",
+                    "region": "",
+                    "role_arn": "",
+                    "run_order": 1,
+                    "timeout_in_minutes": 0,
+                    "version": "1"
+                  }
+                ],
+                "before_entry": [],
+                "name": "Build",
+                "on_failure": [],
+                "on_success": []
+              },
+              {
+                "action": [
+                  {
+                    "category": "Deploy",
+                    "configuration": {
+                      "AppSpecTemplateArtifact": "build_output",
+                      "AppSpecTemplatePath": "appspec.yaml",
+                      "ApplicationName": "fargate-forge-deploy",
+                      "DeploymentGroupName": "fargate-forge-deployment-group",
+                      "TaskDefinitionTemplateArtifact": "build_output",
+                      "TaskDefinitionTemplatePath": "taskdef.json"
+                    },
+                    "input_artifacts": [
+                      "build_output"
+                    ],
+                    "name": "Deploy",
+                    "namespace": "",
+                    "output_artifacts": [],
+                    "owner": "AWS",
+                    "provider": "CodeDeployToECS",
+                    "region": "",
+                    "role_arn": "",
+                    "run_order": 1,
+                    "timeout_in_minutes": 0,
+                    "version": "1"
+                  }
+                ],
+                "before_entry": [],
+                "name": "Deploy",
+                "on_failure": [],
+                "on_success": []
+              }
+            ],
+            "tags": {
+              "Name": "fargate-forge-pipeline"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "fargate-forge-pipeline",
+              "Project": "fargate-forge"
+            },
+            "trigger": [],
+            "trigger_all": [
+              {
+                "git_configuration": [
+                  {
+                    "pull_request": [],
+                    "push": [
+                      {
+                        "branches": [
+                          {
+                            "excludes": [],
+                            "includes": [
+                              "main"
+                            ]
+                          }
+                        ],
+                        "file_paths": [],
+                        "tags": []
+                      }
+                    ],
+                    "source_action_name": "Source"
+                  }
+                ],
+                "provider_type": "CodeStarSourceConnection"
+              }
+            ],
+            "variable": []
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_cloudwatch_log_group.ecs",
+            "aws_codebuild_project.app",
+            "aws_codedeploy_app.app",
+            "aws_codedeploy_deployment_group.app",
+            "aws_ecr_repository.app",
+            "aws_ecs_cluster.main",
+            "aws_ecs_service.app",
+            "aws_ecs_task_definition.app",
+            "aws_iam_role.codebuild",
+            "aws_iam_role.codedeploy",
+            "aws_iam_role.codepipeline",
+            "aws_iam_role.ecs_task_execution",
+            "aws_lb.main",
+            "aws_lb_listener.http",
+            "aws_lb_target_group.blue",
+            "aws_lb_target_group.green",
+            "aws_s3_bucket.artifacts",
+            "aws_security_group.alb",
+            "aws_security_group.ecs_tasks",
+            "aws_subnet.private",
+            "aws_subnet.public",
+            "aws_vpc.main",
+            "data.aws_caller_identity.current",
+            "data.aws_region.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_ecr_lifecycle_policy",
+      "name": "app",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "fargate-forge-app",
+            "policy": "{\"rules\":[{\"action\":{\"type\":\"expire\"},\"description\":\"Keep last 10 images\",\"rulePriority\":1,\"selection\":{\"countNumber\":10,\"countType\":\"imageCountMoreThan\",\"tagStatus\":\"any\"}}]}",
+            "registry_id": "584996267165",
+            "repository": "fargate-forge-app"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_ecr_repository.app"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_ecr_repository",
+      "name": "app",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ecr:us-east-1:584996267165:repository/fargate-forge-app",
+            "encryption_configuration": [
+              {
+                "encryption_type": "AES256",
+                "kms_key": ""
+              }
+            ],
+            "force_delete": null,
+            "id": "fargate-forge-app",
+            "image_scanning_configuration": [
+              {
+                "scan_on_push": true
+              }
+            ],
+            "image_tag_mutability": "MUTABLE",
+            "name": "fargate-forge-app",
+            "registry_id": "584996267165",
+            "repository_url": "584996267165.dkr.ecr.us-east-1.amazonaws.com/fargate-forge-app",
+            "tags": {},
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "fargate-forge"
+            },
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiZGVsZXRlIjoxMjAwMDAwMDAwMDAwfX0="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_ecr_repository_policy",
+      "name": "app",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "fargate-forge-app",
+            "policy": "{\"Statement\":[{\"Action\":[\"ecr:GetDownloadUrlForLayer\",\"ecr:BatchGetImage\",\"ecr:BatchCheckLayerAvailability\",\"ecr:PutImage\",\"ecr:InitiateLayerUpload\",\"ecr:UploadLayerPart\",\"ecr:CompleteLayerUpload\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::584996267165:root\"]},\"Sid\":\"AllowPushPull\"}],\"Version\":\"2012-10-17\"}",
+            "registry_id": "584996267165",
+            "repository": "fargate-forge-app"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_ecr_repository.app",
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_ecs_cluster",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ecs:us-east-1:584996267165:cluster/fargate-forge-cluster",
+            "configuration": [],
+            "id": "arn:aws:ecs:us-east-1:584996267165:cluster/fargate-forge-cluster",
+            "name": "fargate-forge-cluster",
+            "service_connect_defaults": [],
+            "setting": [
+              {
+                "name": "containerInsights",
+                "value": "enabled"
+              }
+            ],
+            "tags": {
+              "Name": "fargate-forge-cluster"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "fargate-forge-cluster",
+              "Project": "fargate-forge"
+            }
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_ecs_service",
+      "name": "app",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "alarms": [],
+            "availability_zone_rebalancing": "DISABLED",
+            "capacity_provider_strategy": [],
+            "cluster": "arn:aws:ecs:us-east-1:584996267165:cluster/fargate-forge-cluster",
+            "deployment_circuit_breaker": [],
+            "deployment_controller": [
+              {
+                "type": "CODE_DEPLOY"
+              }
+            ],
+            "deployment_maximum_percent": 200,
+            "deployment_minimum_healthy_percent": 100,
+            "desired_count": 2,
+            "enable_ecs_managed_tags": false,
+            "enable_execute_command": false,
+            "force_delete": null,
+            "force_new_deployment": null,
+            "health_check_grace_period_seconds": 0,
+            "iam_role": "/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
+            "id": "arn:aws:ecs:us-east-1:584996267165:service/fargate-forge-cluster/fargate-forge-app",
+            "launch_type": "FARGATE",
+            "load_balancer": [
+              {
+                "container_name": "fargate-forge-app",
+                "container_port": 8000,
+                "elb_name": "",
+                "target_group_arn": "arn:aws:elasticloadbalancing:us-east-1:584996267165:targetgroup/fargate-forge-tg-green/d0511d5894462ccd"
+              }
+            ],
+            "name": "fargate-forge-app",
+            "network_configuration": [
+              {
+                "assign_public_ip": false,
+                "security_groups": [
+                  "sg-0c91e8cd26f8f72e4"
+                ],
+                "subnets": [
+                  "subnet-03608ab633dde6b43",
+                  "subnet-045f390c566cbe037"
+                ]
+              }
+            ],
+            "ordered_placement_strategy": [],
+            "placement_constraints": [],
+            "platform_version": "1.4.0",
+            "propagate_tags": "NONE",
+            "scheduling_strategy": "REPLICA",
+            "service_connect_configuration": [],
+            "service_registries": [],
+            "tags": {},
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "fargate-forge"
+            },
+            "task_definition": "arn:aws:ecs:us-east-1:584996267165:task-definition/fargate-forge-app:7",
+            "timeouts": null,
+            "triggers": {},
+            "volume_configuration": [],
+            "vpc_lattice_configurations": [],
+            "wait_for_steady_state": false
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_cloudwatch_log_group.ecs",
+            "aws_ecr_repository.app",
+            "aws_ecs_cluster.main",
+            "aws_ecs_task_definition.app",
+            "aws_iam_role.ecs_task_execution",
+            "aws_lb_target_group.blue",
+            "aws_security_group.alb",
+            "aws_security_group.ecs_tasks",
+            "aws_subnet.private",
+            "aws_vpc.main",
+            "data.aws_region.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_ecs_task_definition",
+      "name": "app",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ecs:us-east-1:584996267165:task-definition/fargate-forge-app:8",
+            "arn_without_revision": "arn:aws:ecs:us-east-1:584996267165:task-definition/fargate-forge-app",
+            "container_definitions": "[{\"environment\":[],\"essential\":true,\"image\":\"584996267165.dkr.ecr.us-east-1.amazonaws.com/fargate-forge-app:latest\",\"logConfiguration\":{\"logDriver\":\"awslogs\",\"options\":{\"awslogs-group\":\"/aws/ecs/fargate-forge\",\"awslogs-region\":\"us-east-1\",\"awslogs-stream-prefix\":\"ecs\"}},\"mountPoints\":[],\"name\":\"fargate-forge-app\",\"portMappings\":[{\"containerPort\":8000,\"hostPort\":8000,\"protocol\":\"tcp\"}],\"systemControls\":[],\"volumesFrom\":[]}]",
+            "cpu": "256",
+            "enable_fault_injection": false,
+            "ephemeral_storage": [],
+            "execution_role_arn": "arn:aws:iam::584996267165:role/fargate-forge-ecs-task-execution",
+            "family": "fargate-forge-app",
+            "id": "fargate-forge-app",
+            "inference_accelerator": [],
+            "ipc_mode": "",
+            "memory": "512",
+            "network_mode": "awsvpc",
+            "pid_mode": "",
+            "placement_constraints": [],
+            "proxy_configuration": [],
+            "requires_compatibilities": [
+              "FARGATE"
+            ],
+            "revision": 8,
+            "runtime_platform": [],
+            "skip_destroy": false,
+            "tags": {},
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "fargate-forge"
+            },
+            "task_role_arn": "",
+            "track_latest": false,
+            "volume": []
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_cloudwatch_log_group.ecs",
+            "aws_ecr_repository.app",
+            "aws_iam_role.ecs_task_execution",
+            "data.aws_region.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_eip",
+      "name": "nat",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "address": null,
+            "allocation_id": "eipalloc-099f2982c0b05369f",
+            "arn": "arn:aws:ec2:us-east-1:584996267165:elastic-ip/eipalloc-099f2982c0b05369f",
+            "associate_with_private_ip": null,
+            "association_id": "eipassoc-08aa485e0c359bd1d",
+            "carrier_ip": "",
+            "customer_owned_ip": "",
+            "customer_owned_ipv4_pool": "",
+            "domain": "vpc",
+            "id": "eipalloc-099f2982c0b05369f",
+            "instance": "",
+            "ipam_pool_id": null,
+            "network_border_group": "us-east-1",
+            "network_interface": "eni-019be01aa00424cc6",
+            "private_dns": "ip-10-0-1-54.ec2.internal",
+            "private_ip": "10.0.1.54",
+            "ptr_record": "",
+            "public_dns": "ec2-52-87-137-60.compute-1.amazonaws.com",
+            "public_ip": "52.87.137.60",
+            "public_ipv4_pool": "amazon",
+            "tags": {
+              "Name": "fargate-forge-nat-eip-1"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "fargate-forge-nat-eip-1",
+              "Project": "fargate-forge"
+            },
+            "timeouts": null,
+            "vpc": true
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiZGVsZXRlIjoxODAwMDAwMDAwMDAsInJlYWQiOjkwMDAwMDAwMDAwMCwidXBkYXRlIjozMDAwMDAwMDAwMDB9fQ=="
+        },
+        {
+          "index_key": 1,
+          "schema_version": 0,
+          "attributes": {
+            "address": null,
+            "allocation_id": "eipalloc-08b0f04b39e891e96",
+            "arn": "arn:aws:ec2:us-east-1:584996267165:elastic-ip/eipalloc-08b0f04b39e891e96",
+            "associate_with_private_ip": null,
+            "association_id": "eipassoc-02524238ffcac8b22",
+            "carrier_ip": "",
+            "customer_owned_ip": "",
+            "customer_owned_ipv4_pool": "",
+            "domain": "vpc",
+            "id": "eipalloc-08b0f04b39e891e96",
+            "instance": "",
+            "ipam_pool_id": null,
+            "network_border_group": "us-east-1",
+            "network_interface": "eni-074c38f96ce7af30d",
+            "private_dns": "ip-10-0-2-82.ec2.internal",
+            "private_ip": "10.0.2.82",
+            "ptr_record": "",
+            "public_dns": "ec2-34-237-122-104.compute-1.amazonaws.com",
+            "public_ip": "34.237.122.104",
+            "public_ipv4_pool": "amazon",
+            "tags": {
+              "Name": "fargate-forge-nat-eip-2"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "fargate-forge-nat-eip-2",
+              "Project": "fargate-forge"
+            },
+            "timeouts": null,
+            "vpc": true
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiZGVsZXRlIjoxODAwMDAwMDAwMDAsInJlYWQiOjkwMDAwMDAwMDAwMCwidXBkYXRlIjozMDAwMDAwMDAwMDB9fQ=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "codebuild",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::584996267165:role/fargate-forge-codebuild",
+            "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"codebuild.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}",
+            "create_date": "2026-04-12T00:56:42Z",
+            "description": "",
+            "force_detach_policies": false,
+            "id": "fargate-forge-codebuild",
+            "inline_policy": [
+              {
+                "name": "fargate-forge-codebuild-policy",
+                "policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":[\"logs:CreateLogGroup\",\"logs:CreateLogStream\",\"logs:PutLogEvents\"],\"Effect\":\"Allow\",\"Resource\":\"*\"},{\"Action\":[\"s3:GetObject\",\"s3:GetObjectVersion\",\"s3:PutObject\"],\"Effect\":\"Allow\",\"Resource\":\"*\"},{\"Action\":[\"kms:Decrypt\",\"kms:GenerateDataKey\"],\"Effect\":\"Allow\",\"Resource\":\"*\"},{\"Action\":[\"ecs:DescribeTaskDefinition\"],\"Effect\":\"Allow\",\"Resource\":\"*\"}]}"
+              }
+            ],
+            "managed_policy_arns": [
+              "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPowerUser"
+            ],
+            "max_session_duration": 3600,
+            "name": "fargate-forge-codebuild",
+            "name_prefix": "",
+            "path": "/",
+            "permissions_boundary": "",
+            "tags": {
+              "Name": "fargate-forge-codebuild"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "fargate-forge-codebuild",
+              "Project": "fargate-forge"
+            },
+            "unique_id": "AROAYQND6USO5VLTFX26E"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "codedeploy",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::584996267165:role/fargate-forge-codedeploy",
+            "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"codedeploy.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}",
+            "create_date": "2026-04-12T00:56:42Z",
+            "description": "",
+            "force_detach_policies": false,
+            "id": "fargate-forge-codedeploy",
+            "inline_policy": [],
+            "managed_policy_arns": [
+              "arn:aws:iam::aws:policy/AWSCodeDeployRoleForECS"
+            ],
+            "max_session_duration": 3600,
+            "name": "fargate-forge-codedeploy",
+            "name_prefix": "",
+            "path": "/",
+            "permissions_boundary": "",
+            "tags": {
+              "Name": "fargate-forge-codedeploy"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "fargate-forge-codedeploy",
+              "Project": "fargate-forge"
+            },
+            "unique_id": "AROAYQND6USOYYVE7UMER"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "codepipeline",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::584996267165:role/fargate-forge-codepipeline",
+            "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"codepipeline.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}",
+            "create_date": "2026-04-12T00:56:42Z",
+            "description": "",
+            "force_detach_policies": false,
+            "id": "fargate-forge-codepipeline",
+            "inline_policy": [
+              {
+                "name": "fargate-forge-codepipeline-policy",
+                "policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":[\"s3:GetObject\",\"s3:GetObjectVersion\",\"s3:GetBucketVersioning\",\"s3:PutObject\"],\"Effect\":\"Allow\",\"Resource\":[\"arn:aws:s3:::fargate-forge-artifacts-584996267165\",\"arn:aws:s3:::fargate-forge-artifacts-584996267165/*\"]},{\"Action\":[\"codebuild:BatchGetBuilds\",\"codebuild:StartBuild\"],\"Effect\":\"Allow\",\"Resource\":\"arn:aws:codebuild:us-east-1:584996267165:project/fargate-forge-build\"},{\"Action\":[\"codedeploy:CreateDeployment\",\"codedeploy:GetDeployment\",\"codedeploy:GetApplication\",\"codedeploy:GetApplicationRevision\",\"codedeploy:RegisterApplicationRevision\",\"codedeploy:GetDeploymentConfig\"],\"Effect\":\"Allow\",\"Resource\":\"*\"},{\"Action\":[\"ecs:RegisterTaskDefinition\",\"ecs:DescribeTaskDefinition\",\"ecs:DescribeServices\"],\"Effect\":\"Allow\",\"Resource\":\"*\"},{\"Action\":\"iam:PassRole\",\"Effect\":\"Allow\",\"Resource\":\"arn:aws:iam::584996267165:role/fargate-forge-ecs-task-execution\"},{\"Action\":[\"codestar-connections:UseConnection\",\"codeconnections:UseConnection\"],\"Effect\":\"Allow\",\"Resource\":\"arn:aws:codeconnections:us-east-1:584996267165:connection/c9778c02-e3b0-4931-ba3d-aab633c3dcff\"}]}"
+              }
+            ],
+            "managed_policy_arns": [],
+            "max_session_duration": 3600,
+            "name": "fargate-forge-codepipeline",
+            "name_prefix": "",
+            "path": "/",
+            "permissions_boundary": "",
+            "tags": {
+              "Name": "fargate-forge-codepipeline"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "fargate-forge-codepipeline",
+              "Project": "fargate-forge"
+            },
+            "unique_id": "AROAYQND6USO45I3ENHVT"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "ecs_task_execution",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::584996267165:role/fargate-forge-ecs-task-execution",
+            "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"ecs-tasks.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}",
+            "create_date": "2026-04-12T00:56:42Z",
+            "description": "",
+            "force_detach_policies": false,
+            "id": "fargate-forge-ecs-task-execution",
+            "inline_policy": [],
+            "managed_policy_arns": [
+              "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+            ],
+            "max_session_duration": 3600,
+            "name": "fargate-forge-ecs-task-execution",
+            "name_prefix": "",
+            "path": "/",
+            "permissions_boundary": "",
+            "tags": {},
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "fargate-forge"
+            },
+            "unique_id": "AROAYQND6USOVWGLZNMXL"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role_policy",
+      "name": "codebuild",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "fargate-forge-codebuild:fargate-forge-codebuild-policy",
+            "name": "fargate-forge-codebuild-policy",
+            "name_prefix": "",
+            "policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":[\"logs:CreateLogGroup\",\"logs:CreateLogStream\",\"logs:PutLogEvents\"],\"Effect\":\"Allow\",\"Resource\":\"*\"},{\"Action\":[\"s3:GetObject\",\"s3:GetObjectVersion\",\"s3:PutObject\"],\"Effect\":\"Allow\",\"Resource\":\"*\"},{\"Action\":[\"kms:Decrypt\",\"kms:GenerateDataKey\"],\"Effect\":\"Allow\",\"Resource\":\"*\"},{\"Action\":[\"ecs:DescribeTaskDefinition\"],\"Effect\":\"Allow\",\"Resource\":\"*\"}]}",
+            "role": "fargate-forge-codebuild"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_iam_role.codebuild"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role_policy",
+      "name": "codepipeline",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "fargate-forge-codepipeline:fargate-forge-codepipeline-policy",
+            "name": "fargate-forge-codepipeline-policy",
+            "name_prefix": "",
+            "policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":[\"s3:GetObject\",\"s3:GetObjectVersion\",\"s3:GetBucketVersioning\",\"s3:PutObject\"],\"Effect\":\"Allow\",\"Resource\":[\"arn:aws:s3:::fargate-forge-artifacts-584996267165\",\"arn:aws:s3:::fargate-forge-artifacts-584996267165/*\"]},{\"Action\":[\"codebuild:BatchGetBuilds\",\"codebuild:StartBuild\"],\"Effect\":\"Allow\",\"Resource\":\"arn:aws:codebuild:us-east-1:584996267165:project/fargate-forge-build\"},{\"Action\":[\"codedeploy:CreateDeployment\",\"codedeploy:GetDeployment\",\"codedeploy:GetApplication\",\"codedeploy:GetApplicationRevision\",\"codedeploy:RegisterApplicationRevision\",\"codedeploy:GetDeploymentConfig\"],\"Effect\":\"Allow\",\"Resource\":\"*\"},{\"Action\":[\"ecs:RegisterTaskDefinition\",\"ecs:DescribeTaskDefinition\",\"ecs:DescribeServices\"],\"Effect\":\"Allow\",\"Resource\":\"*\"},{\"Action\":\"iam:PassRole\",\"Effect\":\"Allow\",\"Resource\":\"arn:aws:iam::584996267165:role/fargate-forge-ecs-task-execution\"},{\"Action\":[\"codestar-connections:UseConnection\",\"codeconnections:UseConnection\"],\"Effect\":\"Allow\",\"Resource\":\"arn:aws:codeconnections:us-east-1:584996267165:connection/c9778c02-e3b0-4931-ba3d-aab633c3dcff\"}]}",
+            "role": "fargate-forge-codepipeline"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_codebuild_project.app",
+            "aws_ecr_repository.app",
+            "aws_iam_role.codebuild",
+            "aws_iam_role.codepipeline",
+            "aws_iam_role.ecs_task_execution",
+            "aws_s3_bucket.artifacts",
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role_policy_attachment",
+      "name": "codebuild_ecr",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "fargate-forge-codebuild-20260409180932451600000002",
+            "policy_arn": "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPowerUser",
+            "role": "fargate-forge-codebuild"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_iam_role.codebuild"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role_policy_attachment",
+      "name": "codedeploy",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "fargate-forge-codedeploy-20260409180932534100000003",
+            "policy_arn": "arn:aws:iam::aws:policy/AWSCodeDeployRoleForECS",
+            "role": "fargate-forge-codedeploy"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_iam_role.codedeploy"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role_policy_attachment",
+      "name": "ecs_task_execution",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "fargate-forge-ecs-task-execution-20260409180932362300000001",
+            "policy_arn": "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
+            "role": "fargate-forge-ecs-task-execution"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_iam_role.ecs_task_execution"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_internet_gateway",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:584996267165:internet-gateway/igw-0c42e5311e00b1992",
+            "id": "igw-0c42e5311e00b1992",
+            "owner_id": "584996267165",
+            "tags": {
+              "Name": "fargate-forge-igw"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "fargate-forge-igw",
+              "Project": "fargate-forge"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-078524d1cf77b502a"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_lb_target_group",
+      "name": "green",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:elasticloadbalancing:us-east-1:584996267165:targetgroup/fargate-forge-tg-green/1c7f2b836fbdb94a",
+            "arn_suffix": "targetgroup/fargate-forge-tg-green/1c7f2b836fbdb94a",
+            "connection_termination": null,
+            "deregistration_delay": "300",
+            "health_check": [
+              {
+                "enabled": true,
+                "healthy_threshold": 2,
+                "interval": 30,
+                "matcher": "200-299",
+                "path": "/health",
+                "port": "traffic-port",
+                "protocol": "HTTP",
+                "timeout": 5,
+                "unhealthy_threshold": 2
+              }
+            ],
+            "id": "arn:aws:elasticloadbalancing:us-east-1:584996267165:targetgroup/fargate-forge-tg-green/1c7f2b836fbdb94a",
+            "ip_address_type": "ipv4",
+            "lambda_multi_value_headers_enabled": false,
+            "load_balancer_arns": [],
+            "load_balancing_algorithm_type": "round_robin",
+            "load_balancing_anomaly_mitigation": "off",
+            "load_balancing_cross_zone_enabled": "use_load_balancer_configuration",
+            "name": "fargate-forge-tg-green",
+            "name_prefix": "",
+            "port": 8000,
+            "preserve_client_ip": null,
+            "protocol": "HTTP",
+            "protocol_version": "HTTP1",
+            "proxy_protocol_v2": false,
+            "slow_start": 0,
+            "stickiness": [
+              {
+                "cookie_duration": 86400,
+                "cookie_name": "",
+                "enabled": false,
+                "type": "lb_cookie"
+              }
+            ],
+            "tags": {
+              "Name": "fargate-forge-tg-green"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "fargate-forge-tg-green",
+              "Project": "fargate-forge"
+            },
+            "target_failover": [
+              {
+                "on_deregistration": null,
+                "on_unhealthy": null
+              }
+            ],
+            "target_group_health": [
+              {
+                "dns_failover": [
+                  {
+                    "minimum_healthy_targets_count": "1",
+                    "minimum_healthy_targets_percentage": "off"
+                  }
+                ],
+                "unhealthy_state_routing": [
+                  {
+                    "minimum_healthy_targets_count": 1,
+                    "minimum_healthy_targets_percentage": "off"
+                  }
+                ]
+              }
+            ],
+            "target_health_state": [
+              {
+                "enable_unhealthy_connection_termination": null,
+                "unhealthy_draining_interval": null
+              }
+            ],
+            "target_type": "ip",
+            "vpc_id": "vpc-078524d1cf77b502a"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_nat_gateway",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "allocation_id": "eipalloc-099f2982c0b05369f",
+            "association_id": "eipassoc-08aa485e0c359bd1d",
+            "connectivity_type": "public",
+            "id": "nat-0de7d5e9da87455b9",
+            "network_interface_id": "eni-019be01aa00424cc6",
+            "private_ip": "10.0.1.54",
+            "public_ip": "52.87.137.60",
+            "secondary_allocation_ids": [],
+            "secondary_private_ip_address_count": 0,
+            "secondary_private_ip_addresses": [],
+            "subnet_id": "subnet-00a886659f9a43ce9",
+            "tags": {
+              "Name": "fargate-forge-nat-us-east-1a"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "fargate-forge-nat-us-east-1a",
+              "Project": "fargate-forge"
+            },
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTgwMDAwMDAwMDAwMCwidXBkYXRlIjo2MDAwMDAwMDAwMDB9fQ==",
+          "dependencies": [
+            "aws_eip.nat",
+            "aws_internet_gateway.main",
+            "aws_subnet.public",
+            "aws_vpc.main"
+          ]
+        },
+        {
+          "index_key": 1,
+          "schema_version": 0,
+          "attributes": {
+            "allocation_id": "eipalloc-08b0f04b39e891e96",
+            "association_id": "eipassoc-02524238ffcac8b22",
+            "connectivity_type": "public",
+            "id": "nat-02272ce24a43e4aae",
+            "network_interface_id": "eni-074c38f96ce7af30d",
+            "private_ip": "10.0.2.82",
+            "public_ip": "34.237.122.104",
+            "secondary_allocation_ids": [],
+            "secondary_private_ip_address_count": 0,
+            "secondary_private_ip_addresses": [],
+            "subnet_id": "subnet-082b14e50f7e38ad5",
+            "tags": {
+              "Name": "fargate-forge-nat-us-east-1b"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "fargate-forge-nat-us-east-1b",
+              "Project": "fargate-forge"
+            },
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTgwMDAwMDAwMDAwMCwidXBkYXRlIjo2MDAwMDAwMDAwMDB9fQ==",
+          "dependencies": [
+            "aws_eip.nat",
+            "aws_internet_gateway.main",
+            "aws_subnet.public",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table",
+      "name": "private",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:584996267165:route-table/rtb-035ea7613423af6bb",
+            "id": "rtb-035ea7613423af6bb",
+            "owner_id": "584996267165",
+            "propagating_vgws": [],
+            "route": [
+              {
+                "carrier_gateway_id": "",
+                "cidr_block": "0.0.0.0/0",
+                "core_network_arn": "",
+                "destination_prefix_list_id": "",
+                "egress_only_gateway_id": "",
+                "gateway_id": "",
+                "ipv6_cidr_block": "",
+                "local_gateway_id": "",
+                "nat_gateway_id": "nat-0de7d5e9da87455b9",
+                "network_interface_id": "",
+                "transit_gateway_id": "",
+                "vpc_endpoint_id": "",
+                "vpc_peering_connection_id": ""
+              }
+            ],
+            "tags": {
+              "Name": "fargate-forge-private-rt-us-east-1a"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "fargate-forge-private-rt-us-east-1a",
+              "Project": "fargate-forge"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-078524d1cf77b502a"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_eip.nat",
+            "aws_internet_gateway.main",
+            "aws_nat_gateway.main",
+            "aws_subnet.public",
+            "aws_vpc.main"
+          ]
+        },
+        {
+          "index_key": 1,
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:584996267165:route-table/rtb-04ad70f8afe40c119",
+            "id": "rtb-04ad70f8afe40c119",
+            "owner_id": "584996267165",
+            "propagating_vgws": [],
+            "route": [
+              {
+                "carrier_gateway_id": "",
+                "cidr_block": "0.0.0.0/0",
+                "core_network_arn": "",
+                "destination_prefix_list_id": "",
+                "egress_only_gateway_id": "",
+                "gateway_id": "",
+                "ipv6_cidr_block": "",
+                "local_gateway_id": "",
+                "nat_gateway_id": "nat-02272ce24a43e4aae",
+                "network_interface_id": "",
+                "transit_gateway_id": "",
+                "vpc_endpoint_id": "",
+                "vpc_peering_connection_id": ""
+              }
+            ],
+            "tags": {
+              "Name": "fargate-forge-private-rt-us-east-1b"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "fargate-forge-private-rt-us-east-1b",
+              "Project": "fargate-forge"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-078524d1cf77b502a"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_eip.nat",
+            "aws_internet_gateway.main",
+            "aws_nat_gateway.main",
+            "aws_subnet.public",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table",
+      "name": "public",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:584996267165:route-table/rtb-0909d2640b7b23901",
+            "id": "rtb-0909d2640b7b23901",
+            "owner_id": "584996267165",
+            "propagating_vgws": [],
+            "route": [
+              {
+                "carrier_gateway_id": "",
+                "cidr_block": "0.0.0.0/0",
+                "core_network_arn": "",
+                "destination_prefix_list_id": "",
+                "egress_only_gateway_id": "",
+                "gateway_id": "igw-0c42e5311e00b1992",
+                "ipv6_cidr_block": "",
+                "local_gateway_id": "",
+                "nat_gateway_id": "",
+                "network_interface_id": "",
+                "transit_gateway_id": "",
+                "vpc_endpoint_id": "",
+                "vpc_peering_connection_id": ""
+              }
+            ],
+            "tags": {
+              "Name": "fargate-forge-public-rt"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "fargate-forge-public-rt",
+              "Project": "fargate-forge"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-078524d1cf77b502a"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_internet_gateway.main",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table_association",
+      "name": "private",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-0740a37371434d996",
+            "route_table_id": "rtb-035ea7613423af6bb",
+            "subnet_id": "subnet-0b0f663cf897e032b",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_eip.nat",
+            "aws_internet_gateway.main",
+            "aws_nat_gateway.main",
+            "aws_route_table.private",
+            "aws_subnet.private",
+            "aws_subnet.public",
+            "aws_vpc.main"
+          ]
+        },
+        {
+          "index_key": 1,
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-0715049e3db1870d2",
+            "route_table_id": "rtb-04ad70f8afe40c119",
+            "subnet_id": "subnet-0803d7072580ac644",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_eip.nat",
+            "aws_internet_gateway.main",
+            "aws_nat_gateway.main",
+            "aws_route_table.private",
+            "aws_subnet.private",
+            "aws_subnet.public",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table_association",
+      "name": "public",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-0778f4cd492374faa",
+            "route_table_id": "rtb-0909d2640b7b23901",
+            "subnet_id": "subnet-00a886659f9a43ce9",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_internet_gateway.main",
+            "aws_route_table.public",
+            "aws_subnet.public",
+            "aws_vpc.main"
+          ]
+        },
+        {
+          "index_key": 1,
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-0497bba5434b98ec3",
+            "route_table_id": "rtb-0909d2640b7b23901",
+            "subnet_id": "subnet-082b14e50f7e38ad5",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_internet_gateway.main",
+            "aws_route_table.public",
+            "aws_subnet.public",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "artifacts",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "acceleration_status": "",
+            "acl": null,
+            "arn": "arn:aws:s3:::fargate-forge-artifacts-584996267165",
+            "bucket": "fargate-forge-artifacts-584996267165",
+            "bucket_domain_name": "fargate-forge-artifacts-584996267165.s3.amazonaws.com",
+            "bucket_prefix": "",
+            "bucket_regional_domain_name": "fargate-forge-artifacts-584996267165.s3.us-east-1.amazonaws.com",
+            "cors_rule": [],
+            "force_destroy": true,
+            "grant": [
+              {
+                "id": "7e886c012a41374a164444a89436037e73588e41483a464f84d17afb4bd98814",
+                "permissions": [
+                  "FULL_CONTROL"
+                ],
+                "type": "CanonicalUser",
+                "uri": ""
+              }
+            ],
+            "hosted_zone_id": "Z3AQBSTGFYJSTF",
+            "id": "fargate-forge-artifacts-584996267165",
+            "lifecycle_rule": [],
+            "logging": [],
+            "object_lock_configuration": [],
+            "object_lock_enabled": false,
+            "policy": "",
+            "region": "us-east-1",
+            "replication_configuration": [],
+            "request_payer": "BucketOwner",
+            "server_side_encryption_configuration": [
+              {
+                "rule": [
+                  {
+                    "apply_server_side_encryption_by_default": [
+                      {
+                        "kms_master_key_id": "",
+                        "sse_algorithm": "AES256"
+                      }
+                    ],
+                    "bucket_key_enabled": false
+                  }
+                ]
+              }
+            ],
+            "tags": {
+              "Name": "fargate-forge-artifacts"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "fargate-forge-artifacts",
+              "Project": "fargate-forge"
+            },
+            "timeouts": null,
+            "versioning": [
+              {
+                "enabled": true,
+                "mfa_delete": false
+              }
+            ],
+            "website": [],
+            "website_domain": null,
+            "website_endpoint": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_public_access_block",
+      "name": "artifacts",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "block_public_acls": true,
+            "block_public_policy": true,
+            "bucket": "fargate-forge-artifacts-584996267165",
+            "id": "fargate-forge-artifacts-584996267165",
+            "ignore_public_acls": true,
+            "restrict_public_buckets": true
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.artifacts",
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_server_side_encryption_configuration",
+      "name": "artifacts",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "bucket": "fargate-forge-artifacts-584996267165",
+            "expected_bucket_owner": "",
+            "id": "fargate-forge-artifacts-584996267165",
+            "rule": [
+              {
+                "apply_server_side_encryption_by_default": [
+                  {
+                    "kms_master_key_id": "",
+                    "sse_algorithm": "AES256"
+                  }
+                ],
+                "bucket_key_enabled": false
+              }
+            ]
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.artifacts",
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_versioning",
+      "name": "artifacts",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "bucket": "fargate-forge-artifacts-584996267165",
+            "expected_bucket_owner": "",
+            "id": "fargate-forge-artifacts-584996267165",
+            "mfa": null,
+            "versioning_configuration": [
+              {
+                "mfa_delete": "",
+                "status": "Enabled"
+              }
+            ]
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.artifacts",
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "alb",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:584996267165:security-group/sg-00ec1a196dff9f4dc",
+            "description": "Security group for the Application Load Balancer",
+            "egress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "Allow all outbound traffic",
+                "from_port": 0,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "-1",
+                "security_groups": [],
+                "self": false,
+                "to_port": 0
+              }
+            ],
+            "id": "sg-00ec1a196dff9f4dc",
+            "ingress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "HTTP from internet",
+                "from_port": 80,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [],
+                "self": false,
+                "to_port": 80
+              },
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "HTTPS from internet",
+                "from_port": 443,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [],
+                "self": false,
+                "to_port": 443
+              }
+            ],
+            "name": "fargate-forge-alb-20260412025230160200000001",
+            "name_prefix": "fargate-forge-alb-",
+            "owner_id": "584996267165",
+            "revoke_rules_on_delete": false,
+            "tags": {
+              "Name": "fargate-forge-alb-sg"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "fargate-forge-alb-sg",
+              "Project": "fargate-forge"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-078524d1cf77b502a"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "ecs_tasks",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:584996267165:security-group/sg-00de8e1abf50239ed",
+            "description": "Security group for ECS tasks - only accepts traffic from ALB",
+            "egress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "",
+                "from_port": 0,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "-1",
+                "security_groups": [],
+                "self": false,
+                "to_port": 0
+              }
+            ],
+            "id": "sg-00de8e1abf50239ed",
+            "ingress": [
+              {
+                "cidr_blocks": [],
+                "description": "",
+                "from_port": 8000,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [
+                  "sg-00ec1a196dff9f4dc"
+                ],
+                "self": false,
+                "to_port": 8000
+              }
+            ],
+            "name": "fargate-forge-ecs-tasks-sg",
+            "name_prefix": "",
+            "owner_id": "584996267165",
+            "revoke_rules_on_delete": false,
+            "tags": {
+              "Name": "fargate-forge-ecs-tasks-sg"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "fargate-forge-ecs-tasks-sg",
+              "Project": "fargate-forge"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-078524d1cf77b502a"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "aws_security_group.alb",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "private",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:584996267165:subnet/subnet-0b0f663cf897e032b",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-east-1a",
+            "availability_zone_id": "use1-az1",
+            "cidr_block": "10.0.3.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-0b0f663cf897e032b",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": false,
+            "outpost_arn": "",
+            "owner_id": "584996267165",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": {
+              "Name": "fargate-forge-private-us-east-1a"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "fargate-forge-private-us-east-1a",
+              "Project": "fargate-forge"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-078524d1cf77b502a"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        },
+        {
+          "index_key": 1,
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:584996267165:subnet/subnet-0803d7072580ac644",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-east-1b",
+            "availability_zone_id": "use1-az2",
+            "cidr_block": "10.0.4.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-0803d7072580ac644",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": false,
+            "outpost_arn": "",
+            "owner_id": "584996267165",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": {
+              "Name": "fargate-forge-private-us-east-1b"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "fargate-forge-private-us-east-1b",
+              "Project": "fargate-forge"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-078524d1cf77b502a"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "public",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:584996267165:subnet/subnet-00a886659f9a43ce9",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-east-1a",
+            "availability_zone_id": "use1-az1",
+            "cidr_block": "10.0.1.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-00a886659f9a43ce9",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": true,
+            "outpost_arn": "",
+            "owner_id": "584996267165",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": {
+              "Name": "fargate-forge-public-us-east-1a"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "fargate-forge-public-us-east-1a",
+              "Project": "fargate-forge"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-078524d1cf77b502a"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        },
+        {
+          "index_key": 1,
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:584996267165:subnet/subnet-082b14e50f7e38ad5",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-east-1b",
+            "availability_zone_id": "use1-az2",
+            "cidr_block": "10.0.2.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-082b14e50f7e38ad5",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": true,
+            "outpost_arn": "",
+            "owner_id": "584996267165",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": {
+              "Name": "fargate-forge-public-us-east-1b"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "fargate-forge-public-us-east-1b",
+              "Project": "fargate-forge"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-078524d1cf77b502a"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_vpc",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:584996267165:vpc/vpc-078524d1cf77b502a",
+            "assign_generated_ipv6_cidr_block": false,
+            "cidr_block": "10.0.0.0/16",
+            "default_network_acl_id": "acl-0d5d912f081af64b4",
+            "default_route_table_id": "rtb-0dac5db4d79a76964",
+            "default_security_group_id": "sg-0c3a816d1e4859c7d",
+            "dhcp_options_id": "dopt-0a5d82d0086914d0d",
+            "enable_dns_hostnames": true,
+            "enable_dns_support": true,
+            "enable_network_address_usage_metrics": false,
+            "id": "vpc-078524d1cf77b502a",
+            "instance_tenancy": "default",
+            "ipv4_ipam_pool_id": null,
+            "ipv4_netmask_length": null,
+            "ipv6_association_id": "",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_network_border_group": "",
+            "ipv6_ipam_pool_id": "",
+            "ipv6_netmask_length": 0,
+            "main_route_table_id": "rtb-0dac5db4d79a76964",
+            "owner_id": "584996267165",
+            "tags": {
+              "Name": "fargate-forge-vpc"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "fargate-forge-vpc",
+              "Project": "fargate-forge"
+            }
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_wafv2_web_acl",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "application_integration_url": "",
+            "arn": "arn:aws:wafv2:us-east-1:584996267165:regional/webacl/fargate-forge-waf/5c82175e-fc4f-4f5b-97c8-ae1f74f29731",
+            "association_config": [],
+            "capacity": 902,
+            "captcha_config": [],
+            "challenge_config": [],
+            "custom_response_body": [],
+            "data_protection_config": [],
+            "default_action": [
+              {
+                "allow": [
+                  {
+                    "custom_request_handling": []
+                  }
+                ],
+                "block": []
+              }
+            ],
+            "description": "WAF WebACL for fargate-forge ALB",
+            "id": "5c82175e-fc4f-4f5b-97c8-ae1f74f29731",
+            "lock_token": "c1de4461-369d-4468-a3ec-0b25ae6a6f92",
+            "name": "fargate-forge-waf",
+            "name_prefix": "",
+            "rule": [
+              {
+                "action": [
+                  {
+                    "allow": [],
+                    "block": [
+                      {
+                        "custom_response": []
+                      }
+                    ],
+                    "captcha": [],
+                    "challenge": [],
+                    "count": []
+                  }
+                ],
+                "captcha_config": [],
+                "challenge_config": [],
+                "name": "RateLimitRule",
+                "override_action": [],
+                "priority": 3,
+                "rule_label": [],
+                "statement": [
+                  {
+                    "and_statement": [],
+                    "asn_match_statement": [],
+                    "byte_match_statement": [],
+                    "geo_match_statement": [],
+                    "ip_set_reference_statement": [],
+                    "label_match_statement": [],
+                    "managed_rule_group_statement": [],
+                    "not_statement": [],
+                    "or_statement": [],
+                    "rate_based_statement": [
+                      {
+                        "aggregate_key_type": "IP",
+                        "custom_key": [],
+                        "evaluation_window_sec": 300,
+                        "forwarded_ip_config": [],
+                        "limit": 100,
+                        "scope_down_statement": []
+                      }
+                    ],
+                    "regex_match_statement": [],
+                    "regex_pattern_set_reference_statement": [],
+                    "rule_group_reference_statement": [],
+                    "size_constraint_statement": [],
+                    "sqli_match_statement": [],
+                    "xss_match_statement": []
+                  }
+                ],
+                "visibility_config": [
+                  {
+                    "cloudwatch_metrics_enabled": true,
+                    "metric_name": "RateLimitRule",
+                    "sampled_requests_enabled": true
+                  }
+                ]
+              },
+              {
+                "action": [],
+                "captcha_config": [],
+                "challenge_config": [],
+                "name": "AWS-AWSManagedRulesCommonRuleSet",
+                "override_action": [
+                  {
+                    "count": [],
+                    "none": [
+                      {}
+                    ]
+                  }
+                ],
+                "priority": 1,
+                "rule_label": [],
+                "statement": [
+                  {
+                    "and_statement": [],
+                    "asn_match_statement": [],
+                    "byte_match_statement": [],
+                    "geo_match_statement": [],
+                    "ip_set_reference_statement": [],
+                    "label_match_statement": [],
+                    "managed_rule_group_statement": [
+                      {
+                        "managed_rule_group_configs": [],
+                        "name": "AWSManagedRulesCommonRuleSet",
+                        "rule_action_override": [],
+                        "scope_down_statement": [],
+                        "vendor_name": "AWS",
+                        "version": ""
+                      }
+                    ],
+                    "not_statement": [],
+                    "or_statement": [],
+                    "rate_based_statement": [],
+                    "regex_match_statement": [],
+                    "regex_pattern_set_reference_statement": [],
+                    "rule_group_reference_statement": [],
+                    "size_constraint_statement": [],
+                    "sqli_match_statement": [],
+                    "xss_match_statement": []
+                  }
+                ],
+                "visibility_config": [
+                  {
+                    "cloudwatch_metrics_enabled": true,
+                    "metric_name": "AWSManagedRulesCommonRuleSet",
+                    "sampled_requests_enabled": true
+                  }
+                ]
+              },
+              {
+                "action": [],
+                "captcha_config": [],
+                "challenge_config": [],
+                "name": "AWS-AWSManagedRulesKnownBadInputsRuleSet",
+                "override_action": [
+                  {
+                    "count": [],
+                    "none": [
+                      {}
+                    ]
+                  }
+                ],
+                "priority": 2,
+                "rule_label": [],
+                "statement": [
+                  {
+                    "and_statement": [],
+                    "asn_match_statement": [],
+                    "byte_match_statement": [],
+                    "geo_match_statement": [],
+                    "ip_set_reference_statement": [],
+                    "label_match_statement": [],
+                    "managed_rule_group_statement": [
+                      {
+                        "managed_rule_group_configs": [],
+                        "name": "AWSManagedRulesKnownBadInputsRuleSet",
+                        "rule_action_override": [],
+                        "scope_down_statement": [],
+                        "vendor_name": "AWS",
+                        "version": ""
+                      }
+                    ],
+                    "not_statement": [],
+                    "or_statement": [],
+                    "rate_based_statement": [],
+                    "regex_match_statement": [],
+                    "regex_pattern_set_reference_statement": [],
+                    "rule_group_reference_statement": [],
+                    "size_constraint_statement": [],
+                    "sqli_match_statement": [],
+                    "xss_match_statement": []
+                  }
+                ],
+                "visibility_config": [
+                  {
+                    "cloudwatch_metrics_enabled": true,
+                    "metric_name": "AWSManagedRulesKnownBadInputsRuleSet",
+                    "sampled_requests_enabled": true
+                  }
+                ]
+              }
+            ],
+            "rule_json": null,
+            "scope": "REGIONAL",
+            "tags": {},
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "fargate-forge"
+            },
+            "token_domains": [],
+            "visibility_config": [
+              {
+                "cloudwatch_metrics_enabled": true,
+                "metric_name": "fargate-forge-waf",
+                "sampled_requests_enabled": true
+              }
+            ]
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjAifQ=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_wafv2_web_acl_logging_configuration",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "arn:aws:wafv2:us-east-1:584996267165:regional/webacl/fargate-forge-waf/5c82175e-fc4f-4f5b-97c8-ae1f74f29731",
+            "log_destination_configs": [
+              "arn:aws:logs:us-east-1:584996267165:log-group:aws-waf-logs-fargate-forge"
+            ],
+            "logging_filter": [],
+            "redacted_fields": [],
+            "resource_arn": "arn:aws:wafv2:us-east-1:584996267165:regional/webacl/fargate-forge-waf/5c82175e-fc4f-4f5b-97c8-ae1f74f29731"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_cloudwatch_log_group.waf",
+            "aws_wafv2_web_acl.main"
+          ]
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}

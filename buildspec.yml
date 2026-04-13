@@ -35,4 +35,4 @@ artifacts:
   files:
     - appspec.yaml
     - taskdef.json
-    - imageDetail.json
+    - imageDetail.json 
