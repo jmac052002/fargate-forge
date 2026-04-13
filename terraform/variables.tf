@@ -80,4 +80,9 @@ variable "github_branch" {
   description = "GitHub branch CodePipeline watches"
   type        = string
   default     = "main"
-}
+} 
+
+variable "alert_email" {
+  description = "Email address to receive infrastructure alerts"
+  type        = string
+} 

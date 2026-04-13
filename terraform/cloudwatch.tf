@@ -16,6 +16,27 @@ resource "aws_cloudwatch_log_group" "ecs" {
   }
 } 
 
+resource "aws_cloudwatch_metric_alarm" "ecs_cpu_high" {
+  alarm_name          = "${var.project_name}-ecs-cpu-high"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = 2
+  metric_name         = "CpuUtilized"
+  namespace           = "ECS/ContainerInsights"
+  period              = 300
+  statistic           = "Average"
+  threshold           = 80
+  alarm_description   = "ECS CPU utilization exceeded 80%"
+
+  dimensions = {
+    ClusterName = "${var.project_name}-cluster"
+    ServiceName = "${var.project_name}-app"
+  }
+
+  tags = {
+    Name = "${var.project_name}-ecs-cpu-high"
+  }
+}
+
 resource "aws_cloudwatch_dashboard" "main" {
   dashboard_name = "${var.project_name}-dashboard"
 
