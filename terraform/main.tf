@@ -1,10 +1,10 @@
 terraform {
-  required_version = ">= 1.0"
+  required_version = ">= 1.10, < 2.0"
 
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.50" 
+      version = "~> 5.50"
     }
   }
 }
@@ -23,7 +23,7 @@ provider "aws" {
 
 data "aws_caller_identity" "current" {}
 
-data "aws_region" "current" {} 
+data "aws_region" "current" {}
 
 output "alb_dns_name" {
   description = "The DNS name of the Application Load Balancer"

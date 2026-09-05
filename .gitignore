@@ -1,10 +1,17 @@
 # Terraform
 .terraform/
-.terraform.lock.hcl
+# Keep .terraform.lock.hcl tracked for reproducible provider selection.
 *.tfstate
-*.tfstate.backup
+*.tfstate.*
+*.tfplan
+.terraform.tfstate.lock.info
 *.tfvars
+*.tfvars.json
+!*.tfvars.example
+!*.tfvars.json.example
+backend.hcl
 crash.log
+crash.*.log
 override.tf
 override.tf.json
 
@@ -13,9 +20,15 @@ __pycache__/
 *.pyc
 *.pyo
 .env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
 venv/
 .venv/
 
+# Generated deployment packages
+lambda/intelligence/package/
+
 # OS
 .DS_Store
-lambda/intelligence/package/

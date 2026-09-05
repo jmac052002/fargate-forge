@@ -1,7 +1,3 @@
-locals {
-  github_connection_arn = "<GITHUB_CONNECTION_ARN>"
-}
-
 resource "aws_s3_bucket" "artifacts" {
   bucket        = "${var.project_name}-artifacts-${data.aws_caller_identity.current.account_id}"
   force_destroy = true
@@ -108,8 +104,8 @@ resource "aws_iam_role_policy" "codepipeline" {
         Resource = "*"
       },
       {
-        Effect = "Allow"
-        Action = "iam:PassRole"
+        Effect   = "Allow"
+        Action   = "iam:PassRole"
         Resource = aws_iam_role.ecs_task_execution.arn
       },
       {
@@ -118,7 +114,7 @@ resource "aws_iam_role_policy" "codepipeline" {
           "codestar-connections:UseConnection",
           "codeconnections:UseConnection"
         ]
-        Resource = local.github_connection_arn
+        Resource = var.github_connection_arn
       }
     ]
   })
@@ -146,7 +142,7 @@ resource "aws_codepipeline" "app" {
       output_artifacts = ["source_output"]
 
       configuration = {
-        ConnectionArn        = local.github_connection_arn
+        ConnectionArn        = var.github_connection_arn
         FullRepositoryId     = "jmac052002/fargate-forge"
         BranchName           = "main"
         OutputArtifactFormat = "CODE_ZIP"

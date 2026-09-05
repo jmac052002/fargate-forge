@@ -1,0 +1,9 @@
+# Copy this file to backend.hcl and replace the placeholders.
+# backend.hcl is ignored and must never contain credentials.
+
+bucket = "REPLACE_WITH_PRIVATE_STATE_BUCKET"
+key    = "fargate-forge/dev/terraform.tfstate"
+region = "REPLACE_WITH_BACKEND_BUCKET_REGION"
+
+# Optional when the backend bucket requires a customer-managed KMS key:
+# kms_key_id = "REPLACE_WITH_KMS_KEY_ARN"

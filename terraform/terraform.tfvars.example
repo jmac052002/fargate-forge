@@ -1,0 +1,5 @@
+# Copy this file to terraform.tfvars and replace the placeholders.
+# terraform.tfvars is ignored and must never be committed.
+
+alert_email          = "you@example.com"
+github_connection_arn = "arn:aws:codeconnections:REGION:ACCOUNT_ID:connection/CONNECTION_ID"

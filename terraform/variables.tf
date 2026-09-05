@@ -80,9 +80,20 @@ variable "github_branch" {
   description = "GitHub branch CodePipeline watches"
   type        = string
   default     = "main"
-} 
+}
 
 variable "alert_email" {
   description = "Email address to receive infrastructure alerts"
   type        = string
-} 
+  sensitive   = true
+}
+
+variable "github_connection_arn" {
+  description = "ARN of the existing AWS CodeConnections connection for the source repository"
+  type        = string
+
+  validation {
+    condition     = can(regex("^arn:aws:(codeconnections|codestar-connections):", var.github_connection_arn))
+    error_message = "github_connection_arn must be an AWS CodeConnections connection ARN."
+  }
+}
